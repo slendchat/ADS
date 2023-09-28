@@ -2,15 +2,21 @@
 
 int main()
 {
-    for (int i = 0; i < 10; i++)
-    {
-        for (int j = 0; j < 20; j++)
-        {
-            printf("*");
-        }
-        
-    }
-    
-    printf("\nhello_world\n");
-    return 1;
+    int i = 69;
+    int number = 72;
+    i+=72;
+
+    int arr[3] = {0};
+
+    int* Ipointer = &i;
+    number = *Ipointer;
+
+    Ipointer = 15;
+    *Ipointer = arr;
+
+    Ipointer = arr +3*sizeof(int);
+    arr[0]=5;
+    Ipointer = 6;
+
+    return 0;
 }
