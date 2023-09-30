@@ -22,5 +22,7 @@ int main()
     *Ipointer = 6;
     printf("%d\n",*Ipointer);
 
+
+    printf("test test test");
     return 0;
 }
