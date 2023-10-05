@@ -1,7 +1,6 @@
 
 #include <stdlib.h>
 #include <iostream>
-#include <string.h>
 
 struct TwoInts // создается структура с 2 переменными типа инт
 {
