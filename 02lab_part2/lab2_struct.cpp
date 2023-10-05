@@ -41,8 +41,8 @@ int main()
 
     sPointer = &s1;                 // помещаем в указатель адресс s1
     sPointer->arr[0] = 35;          // записать в первый элемент массива переменной структуры s1 - 35
-    std::cout << s.arr[0] << std::endl;
-    std::cout << s1.arr[0] << std::endl;
+    std::cout << s.arr[0] << std::endl; // выведет 30
+    std::cout << s1.arr[0] << std::endl;    // выведет 35
 
     StructWithArray structArray[2] = { };   //создается массив переменных типа структуры StructWithArray
     structArray[0].arr[3] = 77;             // первой переменной массива структуры изменить значение массива 
@@ -53,7 +53,7 @@ int main()
     sPointer = &s; // записать в указатель адресс s
     int* pointer = &sPointer->arr[3];   // создается указатель инт в который помещается адресс 4 элемента массива переменной s
     s.arr[3] = 72; // изменить напрямую 4 элемент массива переменной s
-    std::cout << *pointer; // выведет  s.arr[3]
+    std::cout << *pointer; // выведет  s.arr[3] 72
 
     StructWithArray memory; // создать переменную типа StructWithArray
     memset(&memory, 0, sizeof(StructWithArray));    // копирует по адрессу memory нули длинною во весь размер структуры
