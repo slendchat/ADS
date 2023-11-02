@@ -2,7 +2,7 @@
 #include <span>
 struct DynamicArray
 {
-    int capacity;
+    int capacity=1;
     int length;
     int *arr;
 };

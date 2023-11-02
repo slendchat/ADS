@@ -41,7 +41,6 @@ static void test5()
     addElementToArray(&arr, 7);
 
     std::span<int> span = getCurrentSpan(&arr);
-
     assert(span.size() == 3);
     assert(span[0] == 5);
     assert(span[1] == 6);
@@ -53,8 +52,6 @@ static void test6()
     addElementToArray(&arr,5);
     addElementToArray(&arr,6);
     addElementToArray(&arr,7);
-    printf("arr capacity[%d]",arr.capacity);
-    printf("element 2[%d]",getElementAtIndex(&arr,2));
 }
 int main()
 {

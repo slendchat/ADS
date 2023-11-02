@@ -22,6 +22,12 @@ DynamicArray createDynamicArray()
 
 void addElementToArray(DynamicArray *array, int num)
 {
+    if (array->arr==0)
+    {
+        int *arr = new int[1];
+        array->arr=arr;
+    }
+    
     if (array->capacity <= array->length)
     {
         int *arr = new int[array->capacity*2];
