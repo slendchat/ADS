@@ -50,7 +50,7 @@ int getElementAtIndex(DynamicArray *array, int index)
 }
 std::span<int> getCurrentSpan(DynamicArray *array)
 {
-    return { array->arr, (size_t)array->length };
+    return { array->arr, array->length };
 
 }
 void free(DynamicArray *array)
