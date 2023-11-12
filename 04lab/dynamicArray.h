@@ -2,12 +2,12 @@
 #include <span>
 struct DynamicArray
 {
-    int capacity=1;
-    int length;
+    size_t capacity=1;
+    size_t length;
     int *arr;
 };
 
-DynamicArray createDynamicArrayWithCapacity(int capacity);
+DynamicArray createDynamicArrayWithCapacity(size_t capacity);
 DynamicArray createDynamicArray();
 void addElementToArray(DynamicArray *array, int num);
 int getElementAtIndex(DynamicArray *array, int index);

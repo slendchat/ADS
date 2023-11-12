@@ -1,7 +1,7 @@
 #include "dynamicArray.h"
 #include <cassert>
 #include <span>
-DynamicArray createDynamicArrayWithCapacity(int capacity)
+DynamicArray createDynamicArrayWithCapacity(size_t capacity)
 {   
     int *arr = new int[capacity];
     DynamicArray array;
