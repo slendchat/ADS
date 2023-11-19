@@ -1,7 +1,7 @@
 #include "dynamicArray.h"
 #include <cassert>
 #include <span>
-DynamicArray createDynamicArrayWithCapacity(int capacity)
+DynamicArray createDynamicArrayWithCapacity(size_t capacity)
 {   
     int *arr = new int[capacity];
     DynamicArray array;
@@ -50,7 +50,7 @@ int getElementAtIndex(DynamicArray *array, int index)
 }
 std::span<int> getCurrentSpan(DynamicArray *array)
 {
-    return { array->arr, (size_t)array->length };
+    return { array->arr, array->length };
 
 }
 void free(DynamicArray *array)
