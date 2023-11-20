@@ -1,17 +1,17 @@
 struct Node
 {
     int data;
-    Node* nextNode;
+    Node* nextNode=nullptr;
 };
 struct LinkedList
 {
-    Node* firstNode;
-    Node* lastNode;
+    Node* firstNode=nullptr;
+    Node* lastNode=nullptr;
 };
 struct FindNodeResult
 {
-    Node* previousNode;
-    Node* foundValueNode;
+    Node* previousNode = nullptr;
+    Node* foundValueNode = nullptr;
 };
 
 

@@ -1,4 +1,5 @@
 #include "linked_lists.h"
+#include <cassert>
 
 Node* insertAfter(LinkedList* list, Node* node, int value)
 {
@@ -49,4 +50,38 @@ FindNodeResult find(LinkedList* list, int value)
     result.foundValueNode=0;
     result.previousNode=0;
     return result;
+}
+
+void removeAfter(LinkedList* list, Node* node)
+{
+    Node* nodeToRemove;
+    if (node->nextNode==nullptr)
+        return;
+    if (node == nullptr)
+    {
+        delete list->firstNode;
+    }
+
+    nodeToRemove=node->nextNode;
+    node->nextNode = node->nextNode->nextNode;
+    delete nodeToRemove;    
+}
+
+void assertNoCycles(LinkedList* list)
+{
+    Node* node = list->firstNode; 
+    Node* compareNode = node->nextNode;
+    
+    while (node != nullptr)
+    {
+
+        while (compareNode!=nullptr)
+        {
+            assert(node!=compareNode);
+            
+        }
+        
+    }
+    
+    
 }
