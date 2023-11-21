@@ -69,18 +69,20 @@ void removeAfter(LinkedList* list, Node* node)
 
 void assertNoCycles(LinkedList* list)
 {
-    Node* node = list->firstNode; 
-    Node* compareNode = node->nextNode;
-    
-    while (node != nullptr)
-    {
+    if(list->firstNode == nullptr || list->firstNode->nextNode==nullptr)
+        return;    
 
-        while (compareNode!=nullptr)
-        {
-            assert(node!=compareNode);
-            
-        }
-        
+    assert(list->lastNode->nextNode == nullptr);
+    
+    Node* nodeOneStep = list->firstNode;
+    Node* nodeTwoStep = list->firstNode;
+
+    while (nodeTwoStep && nodeTwoStep->nextNode) 
+    {
+        nodeOneStep = nodeOneStep->nextNode;      
+        nodeTwoStep = nodeTwoStep->nextNode->nextNode;       
+
+        assert(nodeOneStep!=nodeTwoStep);
     }
     
     

@@ -22,9 +22,9 @@ int main()
     cout<<"next node val "<<result.previousNode->nextNode->data<<endl;
 
     assertNoCycles(list);
-    cout<<"assert dont work1"<<endl;
+    cout<<"assert work1"<<endl;
 
-    list->lastNode->nextNode = list->firstNode;
+    list->firstNode->nextNode = list->firstNode;
 
     assertNoCycles(list);
     cout<<"assert dont work2"<<endl;

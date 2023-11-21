@@ -38,5 +38,13 @@ int main()
         
 
     assertNoCycles(list);
+    cout<<"no cycles detected1"<<endl;
+
+    //list->lastNode->prevNode->nextNode = list->firstNode->nextNode; // create forward cycle
+
+    list->firstNode->prevNode=list->lastNode->prevNode; // create backward cycle
+
+    assertNoCycles(list);
+    cout<<"no cycles detected"<<endl;
     
 }

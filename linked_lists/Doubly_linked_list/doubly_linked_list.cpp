@@ -77,34 +77,32 @@ void remove(Node* node)
 }
 void assertNoCycles(DoublyLinkedList* list)
 {
-    Node* node = list->firstNode; 
-    Node* compareNode = node->nextNode;
+
+    if(list->firstNode == nullptr || list->firstNode->nextNode==nullptr)
+        return;    
+
+    assert(list->lastNode->nextNode == nullptr);
     
-    while (node!=nullptr)
+    Node* nodeOneStep = list->firstNode;
+    Node* nodeTwoStep = list->firstNode;
+
+    while (nodeTwoStep && nodeTwoStep->nextNode) 
     {
+        nodeOneStep = nodeOneStep->nextNode;      
+        nodeTwoStep = nodeTwoStep->nextNode->nextNode;       
 
-        while (compareNode!=nullptr)
-        {
-            assert(node!=compareNode);
-            compareNode=node->nextNode;
-        }
-
-        node=node->nextNode;
-        compareNode = node->nextNode;
+        assert(nodeOneStep!=nodeTwoStep);
     }
 
-    node = list->lastNode;
-    compareNode = node->prevNode;
-    while (node!=nullptr)
+    nodeOneStep = list->firstNode;
+    nodeTwoStep = list->firstNode;
+
+    while (nodeTwoStep && nodeTwoStep->prevNode) 
     {
+        nodeOneStep = nodeOneStep->prevNode;      
+        nodeTwoStep = nodeTwoStep->prevNode->prevNode;       
 
-        while (compareNode!=nullptr)
-        {
-            assert(node!=compareNode);
-            compareNode=node->prevNode;
-        }
-
-        node=node->prevNode;
-        compareNode = node->prevNode;
+        assert(nodeOneStep!=nodeTwoStep);
     }
+
 }
