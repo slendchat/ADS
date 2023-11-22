@@ -9,8 +9,16 @@ Node* insertAfter(LinkedList* list, Node* node, int value)
 
     if (node==nullptr)
     {
-        list->firstNode = nodeNew;
-        list->lastNode = nodeNew;
+        if (list->firstNode != nullptr)
+        {
+            nodeNew->nextNode=list->firstNode;
+            list->firstNode = nodeNew;
+        }
+        else if (list->firstNode == nullptr)
+        {
+            list->firstNode = nodeNew;
+        }
+
     }
     else if (node->nextNode==nullptr)
     {

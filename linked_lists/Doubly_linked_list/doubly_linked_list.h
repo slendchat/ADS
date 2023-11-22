@@ -11,7 +11,7 @@ struct DoublyLinkedList
 };
 
 void assertNoCycles(DoublyLinkedList* list);
-void remove(Node* node);
+void remove(Node* node,DoublyLinkedList* list);
 Node* find(DoublyLinkedList* list, int value);
 Node* insertBefore(DoublyLinkedList* list, Node* node, int value);
 Node* insertAfter(DoublyLinkedList* list, Node* node, int value);

@@ -1,5 +1,5 @@
 #include "queue.h"
-
+#include <cassert>
 
 void enqueue(Queue* queue, int value) // last in first out
 {
@@ -22,20 +22,27 @@ void enqueue(Queue* queue, int value) // last in first out
 
 int dequeue(Queue* queue)
 {
-    if (queue->firstNode==nullptr)
-        return -1;
-    
+    assert(queue->firstNode!=nullptr);
+
     Node* temp = queue->firstNode;
     queue->firstNode = queue->firstNode->next;
+
+    if (queue->firstNode->next==nullptr)
+    {
+        queue->lastNode=nullptr;
+    }
+
+    
+
     delete temp;
     return 1;
 }
 
-int isEmpty(Queue* queue)
+bool isEmpty(Queue* queue)
 {
     if (queue->firstNode==nullptr)
     {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

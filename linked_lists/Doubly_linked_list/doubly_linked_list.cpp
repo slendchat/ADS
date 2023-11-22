@@ -10,10 +10,21 @@ Node* insertAfter(DoublyLinkedList* list, Node* node, int value)
 
     if (node==nullptr)
     {
-        list->firstNode = nodeNew;
-        list->lastNode = nodeNew;
+        if (list->firstNode != nullptr)
+        {
+            nodeNew->nextNode=list->firstNode;
+            list->firstNode = nodeNew;
+        }
+        else if (list->firstNode == nullptr)
+        {
+            list->firstNode = nodeNew;
+        }
+
     }
-    else if (node->nextNode==nullptr)
+    
+    
+
+    if (node->nextNode==nullptr)
     {
         node->nextNode = nodeNew;
         list->lastNode = nodeNew;
@@ -33,15 +44,24 @@ Node* insertBefore(DoublyLinkedList* list, Node* node, int value) // три сл
     nodeNew->nextNode=node;
     nodeNew->data=value;
 
+    if (node==nullptr)
+    {
+        if (list->lastNode != nullptr)
+        {
+            nodeNew->prevNode=list->lastNode;
+            list->lastNode = nodeNew;
+        }
+        else if (list->lastNode == nullptr)
+        {
+            list->lastNode = nodeNew;
+        }
+
+    }
+
     if (node->prevNode==nullptr)
     {
         node->prevNode = nodeNew;
         list->firstNode=nodeNew;
-    }
-    else if (node==nullptr)
-    {
-        list->firstNode=nodeNew;
-        list->lastNode=nodeNew;
     }
     else
     {
@@ -69,10 +89,24 @@ Node* find(DoublyLinkedList* list, int value)
     return nullptr;
 }
 
-void remove(Node* node)
+void remove(Node* node, DoublyLinkedList* list)
 {
-    node->prevNode->nextNode = node->nextNode;
-    node->nextNode->prevNode = node->prevNode;
+    if (node == list->firstNode)
+    {
+        list->firstNode = node->nextNode;
+        node->nextNode->prevNode = nullptr;
+    }
+    else if (node == list->lastNode)
+    {
+        list->lastNode = node->prevNode;
+        node->prevNode->nextNode = nullptr;
+    }
+    else
+    {
+        node->prevNode->nextNode = node->nextNode;
+        node->nextNode->prevNode = node->prevNode;
+    }
+    
     delete node;
 }
 void assertNoCycles(DoublyLinkedList* list)

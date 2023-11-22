@@ -14,4 +14,4 @@ void enqueue(Queue* queue, int value); // last in first out
 
 int dequeue(Queue* queue);
 
-int isEmpty(Queue* queue);
+bool isEmpty(Queue* queue);
