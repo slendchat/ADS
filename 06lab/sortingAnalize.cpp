@@ -11,7 +11,8 @@ using std::span;
 using std::cout;
 using std::endl;
 
-span<int> createRandomBuff(size_t size,int* buf)
+//buff create
+span<int> createBuff(size_t size,int* buf)
 {
 
     buf = new int[size];
@@ -19,6 +20,8 @@ span<int> createRandomBuff(size_t size,int* buf)
 
     return { buf,size};
 }
+
+//buff fullfill
 void randomFill(span<int> buff)
 {
     srand(time(0));
@@ -29,6 +32,19 @@ void randomFill(span<int> buff)
     }
 }
 
+void ascendingFill(span<int> buff)
+{
+    randomFill(buff);
+    callMergeSort(buff);
+}
+
+void descendingFill(span<int> buff)
+{
+    randomFill(buff);
+    bubbleSortDescending(buff); 
+}
+
+//count duration of the sorting algorithm
 std::chrono::microseconds cntDurOfSortAlg(void(*op)(span<int>),span<int> buff)
 {
     auto startTime = std::chrono::high_resolution_clock::now();
@@ -41,6 +57,7 @@ std::chrono::microseconds cntDurOfSortAlg(void(*op)(span<int>),span<int> buff)
 
     return duration;
 }
+//count duration of the searching algorithm
 std::chrono::microseconds cntDurOfSearchAlg(void(*op)(span<int>,int),span<int> buff,int elementToFind)
 {
     auto startTime = std::chrono::high_resolution_clock::now();
@@ -53,6 +70,7 @@ std::chrono::microseconds cntDurOfSearchAlg(void(*op)(span<int>,int),span<int> b
 
     return duration;
 }
+//print time in human readable form
 void printTimeFormatted(std::chrono::microseconds timeInMicrosec)
 {
     // Перевод времени в секунды
@@ -66,78 +84,98 @@ void printTimeFormatted(std::chrono::microseconds timeInMicrosec)
     // Вывод времени в микросекундах
     cout << "microseconds: " << timeInMicrosec.count() << " microsec." << std::endl;
 }
-
+//call necessary functions to analize algorithms
 void AnalizeSortingFunctions(span<int> buff)
 {
-    cout<<"\nselectionSort:"<<endl;
+    //SelectionSort
+    cout<<"\nselectionSort random fill:"<<endl;
     randomFill(buff);
     printTimeFormatted(cntDurOfSortAlg(selectionSort,buff));
 
-    cout<<"\nbubbleSort:"<<endl;
+    cout<<"\nselectionSort ascending fill:"<<endl;
+    ascendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(selectionSort,buff));
+
+    cout<<"\nselectionSort descending fill:"<<endl;
+    descendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(selectionSort,buff));
+
+    //bubbleSort
+    cout<<"\n bubbleSort random fill:"<<endl;
     randomFill(buff);
     printTimeFormatted(cntDurOfSortAlg(bubbleSort,buff));
 
-    cout<<"\nbubbleSortRecursive:"<<endl;
+    cout<<"\n bubbleSort ascending fill:"<<endl;
+    ascendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(bubbleSort,buff));
+
+    cout<<"\n bubbleSort descending fill:"<<endl;
+    descendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(bubbleSort,buff));
+
+
+    //bubbleSort recursive
+    cout<<"\n bubbleSort recursive random fill:"<<endl;
     randomFill(buff);
     printTimeFormatted(cntDurOfSortAlg(bubbleSortRecursive,buff));
 
-    cout<<"\nquickSort:"<<endl;
+    cout<<"\n bubbleSort recursive ascending fill:"<<endl;
+    ascendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(bubbleSortRecursive,buff));
+
+    cout<<"\n bubbleSort recursive descending fill:"<<endl;
+    descendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(bubbleSortRecursive,buff));
+
+    //quickSort 
+    cout<<"\n quickSort random fill:"<<endl;
     randomFill(buff);
     printTimeFormatted(cntDurOfSortAlg(quickSort,buff));
 
-    cout<<"\nMergeSort:"<<endl;
+    cout<<"\n quickSort ascending fill:"<<endl;
+    ascendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(quickSort,buff));
+
+    cout<<"\n quickSort descending fill:"<<endl;
+    descendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(quickSort,buff));
+
+    //MergeSort 
+    cout<<"\n MergeSort random fill:"<<endl;
     randomFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(callMergeSort,buff));
+
+    cout<<"\n MergeSort ascending fill:"<<endl;
+    ascendingFill(buff);
+    printTimeFormatted(cntDurOfSortAlg(callMergeSort,buff));
+
+    cout<<"\n MergeSort descending fill:"<<endl;
+    descendingFill(buff);
     printTimeFormatted(cntDurOfSortAlg(callMergeSort,buff));
 }
 
-void AnalizeSearchingFunctions(span<int> buff)
-{
-    cout<<"\nBinary Search:"<<endl;
-    randomFill(buff);
-    printTimeFormatted(cntDurOfSearchAlg(callBinarySearch,buff,buff[(rand()%buff.size())-1]));
-
-    cout<<"\nLinear Search:"<<endl;
-    randomFill(buff);
-    printTimeFormatted(cntDurOfSearchAlg(callLinearSearch,buff,buff[(rand()%buff.size())-1]));
-}
 int main()
 {
     size_t size;
     int* buf;
     span<int> buff;
 
-    size = 10000;
-    cout<<"\n\n\nSize of array: "<<size<<"\n\n\n"<<endl;
-    buff = createRandomBuff(size,buf);
 
-    for (int i = 0; i < 10; i++)
-    {
-        AnalizeSortingFunctions(buff);
-        AnalizeSearchingFunctions(buff);
-        cout<<"\n\n\n-----------------------"<<i<<"------------------------\n\n\n"<<endl;
-    }
-    delete[] buf;
 
-    size = 50000;
-    cout<<"\n\n\nSize of array: "<<size<<"\n\n\n"<<endl;
-    buff = createRandomBuff(size,buf);
-    for (int i = 0; i < 10; i++)
-    {
-        AnalizeSortingFunctions(buff);
-        AnalizeSearchingFunctions(buff);
-        cout<<"\n\n\n-----------------------"<<i<<"------------------------\n\n\n"<<endl;
-    }
-    delete[] buf;
 
-    size = 100000;
+// ANALIZE SORTING ALGORITHMS
+    cout<<"enter size of array: ";
+    std::cin>>size;
     cout<<"\n\n\nSize of array: "<<size<<"\n\n\n"<<endl;
-    buff = createRandomBuff(size,buf);
-    for (int i = 0; i < 10; i++)
+    buff = createBuff(size,buf);
+
+    for (int i = 0; i < 5; i++)
     {
-        AnalizeSortingFunctions(buff);
-        AnalizeSearchingFunctions(buff);
         cout<<"\n\n\n-----------------------"<<i<<"------------------------\n\n\n"<<endl;
+        AnalizeSortingFunctions(buff);
     }
-    delete[] buf;
+
+    system("pause");
+
 
 }

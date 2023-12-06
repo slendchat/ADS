@@ -39,3 +39,5 @@ void quickSort(std::span<int> arr)
         quickSort({ rightStart, rightLength });
     }
 }
+
+
