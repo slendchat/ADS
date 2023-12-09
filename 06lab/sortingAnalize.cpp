@@ -175,6 +175,7 @@ int main()
         AnalizeSortingFunctions(buff);
     }
 
+    delete[] buf;
     system("pause");
 
 
